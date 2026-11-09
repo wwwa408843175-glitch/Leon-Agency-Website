@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <!-- Basic page information and responsive viewport settings -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Leon is a creative agency template showcasing services, projects, and contact information.">
+  <title>Leon | Creative Agency</title>
+
+  <!-- Google Fonts: Work Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* =====================================================
+       1. Global variables, reset, and basic page settings
+       ===================================================== */
+    :root {
+      --main-color: #10cab7;
+      --secondary-color: #2c373e;
+      --section-bg: #f6f6f6;
+      --text-color: #777;
+      --line-height: 1.8;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      font-family: "Work Sans", sans-serif;
+      color: #333;
+      background-color: #fff;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
+
+    /* Responsive container widths */
+    @media (min-width: 768px) {
+      .container { width: 750px; }
+    }
+
+    @media (min-width: 992px) {
+      .container { width: 970px; }
+    }
+
+    @media (min-width: 1200px) {
+      .container { width: 1170px; }
+    }
+
+    /* Reusable section heading */
+    .special-heading {
+      color: #ebeced;
+      font-size: 100px;
+      font-weight: 800;
+      letter-spacing: -3px;
+      line-height: 1.1;
+      text-align: center;
+      user-select: none;
+    }
+
+    .special-heading + p {
+      margin: -30px 0 60px;
+      color: #797979;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    @media (max-width: 767px) {
+      .special-heading { font-size: 60px; }
+      .special-heading + p {
+        margin-top: -20px;
+        font-size: 16px;
+      }
+    }
+
+    /* =====================================================
+       2. Header and dropdown navigation menu
+       ===================================================== */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 18px 0;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      width: 60px;
+      height: auto;
+    }
+
+    .navigation {
+      position: relative;
+    }
+
+    .menu-toggle {
+      display: flex;
+      width: 32px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: #333;
+      transition: var(--transition);
+    }
+
+    .menu-toggle span:nth-child(2) {
+      width: 60%;
+    }
+
+    .navigation:hover .menu-toggle span:nth-child(2),
+    .navigation:focus-within .menu-toggle span:nth-child(2) {
+      width: 100%;
+    }
+
+    .navigation ul {
+      position: absolute;
+      top: calc(100% + 15px);
+      right: 0;
+      z-index: 10;
+      display: none;
+      min-width: 200px;
+      padding: 0;
+      list-style: none;
+      background: var(--section-bg);
+      border-radius: 5px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    .navigation ul::before {
+      position: absolute;
+      top: -20px;
+      right: 5px;
+      border: 10px solid transparent;
+      border-bottom-color: var(--section-bg);
+      content: "";
+    }
+
+    .navigation:hover ul,
+    .navigation:focus-within ul {
+      display: block;
+    }
+
+    .navigation li:not(:last-child) {
+      border-bottom: 1px solid #e2e2e2;
+    }
+
+    .navigation a {
+      display: block;
+      padding: 14px 16px;
+      color: #333;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .navigation a:hover,
+    .navigation a:focus {
+      padding-left: 25px;
+      color: var(--main-color);
+    }
+
+    /* =====================================================
+       3. Landing section: hero background and introduction
+       ===================================================== */
+    .landing {
+      position: relative;
+      display: grid;
+      min-height: 620px;
+      height: calc(100vh - 70px);
+      place-items: center;
+      padding: 25px 15px;
+      background:
+        linear-gradient(rgba(0, 0, 0, 0.42), rgba(0, 0, 0, 0.42)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80") center / cover no-repeat;
+    }
+
+    .intro-text {
+      width: 360px;
+      max-width: 100%;
+      padding: 32px 24px;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.96);
+      border-radius: 8px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.16);
+    }
+
+    .intro-text h1 {
+      margin-bottom: 10px;
+      color: var(--main-color);
+      font-size: 38px;
+      font-weight: 800;
+    }
+
+    .intro-text p {
+      color: #666;
+      font-size: 16px;
+      line-height: var(--line-height);
+    }
+
+    /* =====================================================
+       4. Features section: three introductory benefits
+       ===================================================== */
+    .features {
+      padding: 65px 0;
+      background: var(--section-bg);
+    }
+
+    .features .container {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+    }
+
+    .feature {
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    .feature i {
+      color: var(--main-color);
+      font-size: 48px;
+    }
+
+    .feature h3 {
+      margin: 25px 0 15px;
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .feature p {
+      color: var(--text-color);
+      font-size: 15px;
+      line-height: var(--line-height);
+    }
+
+    /* =====================================================
+       5. Services section: service descriptions and image
+       ===================================================== */
+    .services {
+      padding: 70px 0;
+    }
+
+    .services-content {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+      margin-top: 55px;
+    }
+
+    .service {
+      display: flex;
+      gap: 22px;
+      margin-bottom: 38px;
+    }
+
+    .service i {
+      flex: 0 0 38px;
+      color: var(--main-color);
+      font-size: 34px;
+      text-align: center;
+    }
+
+    .service h3 {
+      margin-bottom: 12px;
+      font-size: 18px;
+    }
+
+    .service p {
+      color: var(--text-color);
+      font-size: 14px;
+      line-height: var(--line-height);
+    }
+
+    .services-image {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .services-image::before {
+      position: absolute;
+      top: -20px;
+      right: 0;
+      z-index: -1;
+      width: 75px;
+      height: calc(100% + 40px);
+      background: var(--secondary-color);
+      content: "";
+    }
+
+    .services-image img {
+      width: 260px;
+      height: 350px;
+      border-radius: 5px;
+      object-fit: cover;
+    }
+
+    /* =====================================================
+       6. Portfolio section: project cards
+       ===================================================== */
+    .portfolio {
+      padding: 70px 0;
+      background: var(--section-bg);
+    }
+
+    .portfolio-content {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 30px;
+      margin-top: 55px;
+    }
+
+    .portfolio-card {
+      overflow: hidden;
+      background: #fff;
+      border-radius: 6px;
+      box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .portfolio-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.10);
+    }
+
+    .portfolio-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .portfolio-card .info {
+      padding: 22px;
+    }
+
+    .portfolio-card h3 {
+      margin-bottom: 10px;
+      font-size: 19px;
+    }
+
+    .portfolio-card p {
+      color: var(--text-color);
+      font-size: 14px;
+      line-height: var(--line-height);
+    }
+
+    /* =====================================================
+       7. About section: agency image and description
+       ===================================================== */
+    .about {
+      padding: 70px 0 120px;
+    }
+
+    .about-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 80px;
+      margin-top: 65px;
+    }
+
+    .about-image {
+      position: relative;
+      flex: 0 0 250px;
+      height: 375px;
+      margin-left: 35px;
+    }
+
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    .about-image::before {
+      position: absolute;
+      top: -35px;
+      left: -35px;
+      z-index: -1;
+      width: 100px;
+      height: calc(100% + 70px);
+      background: #eff2f3;
+      content: "";
+    }
+
+    .about-image::after {
+      position: absolute;
+      top: -35px;
+      right: -145px;
+      z-index: -1;
+      width: 120px;
+      height: 300px;
+      border-right: 75px solid var(--main-color);
+      border-bottom: 75px solid var(--main-color);
+      content: "";
+    }
+
+    .about-text {
+      flex: 1;
+      max-width: 650px;
+    }
+
+    .about-text p:first-child {
+      margin-bottom: 35px;
+      font-weight: 700;
+      line-height: 2;
+    }
+
+    .about-text hr {
+      display: inline-block;
+      width: 50%;
+      border: 0;
+      border-top: 2px solid var(--main-color);
+    }
+
+    .about-text p:last-child {
+      margin-top: 25px;
+      color: var(--text-color);
+      line-height: 2;
+    }
+
+    /* =====================================================
+       8. Contact section: email and social media links
+       ===================================================== */
+    .contact {
+      padding: 70px 0;
+      background: var(--section-bg);
+    }
+
+    .contact-info {
+      padding: 45px 0 20px;
+      text-align: center;
+    }
+
+    .contact-label {
+      margin-bottom: 15px;
+      color: var(--secondary-color);
+      font-size: clamp(22px, 4vw, 35px);
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .contact-email {
+      display: inline-block;
+      color: var(--main-color);
+      font-size: clamp(20px, 4vw, 34px);
+      font-weight: 800;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 22px;
+      font-size: 15px;
+    }
+
+    .social a {
+      color: var(--secondary-color);
+      transition: color var(--transition);
+    }
+
+    .social a:hover {
+      color: var(--main-color);
+    }
+
+    /* =====================================================
+       9. Footer: copyright information
+       ===================================================== */
+    .site-footer {
+      padding: 28px 15px;
+      color: #fff;
+      background: var(--secondary-color);
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .site-footer span {
+      color: var(--main-color);
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       10. Responsive layout for tablets and mobile phones
+       ===================================================== */
+    @media (max-width: 991px) {
+      .services-content {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .services-image {
+        display: none;
+      }
+
+      .about-content {
+        gap: 45px;
+      }
+
+      .about-image::after {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .landing {
+        min-height: 520px;
+        height: calc(100vh - 65px);
+      }
+
+      .features .container,
+      .services-content,
+      .portfolio-content {
+        grid-template-columns: 1fr;
+      }
+
+      .feature {
+        padding: 15px 10px;
+      }
+
+      .services-content {
+        gap: 5px;
+      }
+
+      .service {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .about {
+        padding-bottom: 75px;
+      }
+
+      .about-content {
+        flex-direction: column;
+        gap: 35px;
+        text-align: center;
+      }
+
+      .about-image {
+        width: 230px;
+        height: 330px;
+        flex-basis: auto;
+        margin: 0 auto;
+      }
+
+      .about-image::before {
+        left: -15px;
+      }
+
+      .about-text {
+        padding: 0 8px;
+      }
+
+      .contact {
+        padding: 55px 0;
+      }
+    }
+
+    /* Respect visitors who prefer reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- =====================================================
+       1. Header: logo and main navigation links
+       ===================================================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="#home" aria-label="Leon home">
+        <img
+          class="logo"
+          src="https://raw.githubusercontent.com/ElzeroWebSchool/HTML_And_CSS_Template_One/main/images/logo.png"
+          alt="Leon agency logo">
+      </a>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <!-- The three lines form the dropdown menu icon -->
+        <div class="menu-toggle" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Internal links navigate to page sections -->
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- =====================================================
+       2. Landing: main welcome message
+       ===================================================== -->
+  <main>
+    <section class="landing" id="home" aria-label="Welcome">
+      <div class="intro-text">
+        <h1>Hello There</h1>
+        <p>We are Leon - Super Creative &amp; Minimal Agency Web Template</p>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         3. Features: three main agency benefits
+         ===================================================== -->
+    <section class="features" aria-label="Our features">
+      <div class="container">
+        <article class="feature">
+          <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          <h3>Tell Us Your Idea</h3>
+          <p>Share your vision with us. We listen carefully and turn your ideas into creative solutions.</p>
+        </article>
+
+        <article class="feature">
+          <i class="fa-regular fa-gem" aria-hidden="true"></i>
+          <h3>We Will Do All The Work</h3>
+          <p>Our team combines creativity and experience to deliver work that meets your expectations.</p>
+        </article>
+
+        <article class="feature">
+          <i class="fa-solid fa-earth-americas" aria-hidden="true"></i>
+          <h3>Your Product is Worldwide</h3>
+          <p>We help your product reach a wider audience through thoughtful and effective design.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         4. Services: services offered by the agency
+         ===================================================== -->
+    <section class="services" id="services">
+      <div class="container">
+        <h2 class="special-heading">Services</h2>
+        <p>Don't be busy, be productive</p>
+
+        <div class="services-content">
+          <div class="services-column">
+            <article class="service">
+              <i class="fa-solid fa-palette" aria-hidden="true"></i>
+              <div class="text">
+                <h3>Graphic Design</h3>
+                <p>Graphic design is visual communication and problem-solving through typography, photography, and illustration.</p>
+              </div>
+            </article>
+
+            <article class="service">
+              <i class="fa-solid fa-vector-square" aria-hidden="true"></i>
+              <div class="text">
+                <h3>UI &amp; UX</h3>
+                <p>UI and UX design improve usability, accessibility, and the overall experience of interacting with a product.</p>
+              </div>
+            </article>
+          </div>
+
+          <div class="services-column">
+            <article class="service">
+              <i class="fa-solid fa-desktop" aria-hidden="true"></i>
+              <div class="text">
+                <h3>Web Design</h3>
+                <p>Web design brings together layout, colors, typography, and images to create attractive and useful websites.</p>
+              </div>
+            </article>
+
+            <article class="service">
+              <i class="fa-solid fa-code" aria-hidden="true"></i>
+              <div class="text">
+                <h3>Web Development</h3>
+                <p>Web development is the process of building and maintaining websites for the internet.</p>
+              </div>
+            </article>
+          </div>
+
+          <!-- Supporting image for the services section -->
+          <div class="services-image">
+            <img
+              src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+              alt="Creative workspace with a laptop">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         5. Portfolio: examples of completed creative projects
+         ===================================================== -->
+    <section class="portfolio" id="portfolio">
+      <div class="container">
+        <h2 class="special-heading">Portfolio</h2>
+        <p>If you do it right, it will last forever.</p>
+
+        <div class="portfolio-content">
+          <article class="portfolio-card">
+            <img
+              src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+              alt="Web design project preview"
+              loading="lazy">
+            <div class="info">
+              <h3>Project One</h3>
+              <p>A creative digital design focused on clarity, usability, and a modern visual identity.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <img
+              src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+              alt="Web development project preview"
+              loading="lazy">
+            <div class="info">
+              <h3>Project Two</h3>
+              <p>A clean development workspace representing a practical and organized digital solution.</p>
+            </div>
+          </article>
+
+          <article class="portfolio-card">
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+              alt="Analytics dashboard project preview"
+              loading="lazy">
+            <div class="info">
+              <h3>Project Three</h3>
+              <p>A business dashboard concept that presents information in a clear and useful way.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         6. About: information about the creative agency
+         ===================================================== -->
+    <section class="about" id="about">
+      <div class="container">
+        <h2 class="special-heading">About</h2>
+        <p>Less is more work</p>
+
+        <div class="about-content">
+          <div class="about-image">
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&amp;fit=crop&amp;w=600&amp;q=80"
+              alt="Creative team working together"
+              loading="lazy">
+          </div>
+
+          <div class="about-text">
+            <p>Leon is a creative agency that believes great ideas deserve thoughtful design. We focus on combining creativity, simplicity, and purpose to create meaningful digital experiences.</p>
+            <hr>
+            <p>Our approach is built on collaboration, attention to detail, and a commitment to delivering clear and effective solutions for every project.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================
+         7. Contact: email address and social media links
+         ===================================================== -->
+    <section class="contact" id="contact">
+      <div class="container">
+        <h2 class="special-heading">Contact</h2>
+        <p>We are born to create</p>
+
+        <div class="contact-info">
+          <p class="contact-label">Feel free to drop us a line at:</p>
+          <a class="contact-email" href="mailto:leonagency@mail.com?subject=Contact">
+            leonagency@mail.com
+          </a>
+
+          <!-- Replace the # values with the agency's real social URLs -->
+          <div class="social">
+            <span>Find Us On Social Networks</span>
+            <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =====================================================
+       8. Footer: copyright notice
+       ===================================================== -->
+  <footer class="site-footer">
+    <p>&copy; 2026 <span>Leon</span> All Rights Reserved</p>
+  </footer>
+</body>
+</html>
